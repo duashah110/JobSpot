@@ -10,6 +10,8 @@ const jobRoutes = require("./src/routes/jobRoutes");
 const companyRoutes = require("./src/routes/companyRoutes");
 const applicationRoutes =
   require("./src/routes/applicationRoutes");
+const savedJobRoutes =
+  require("./src/routes/savedJobRoutes"); 
 
 const app = express();
 
@@ -27,6 +29,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/jobs", jobRoutes);
 app.use("/api/companies", companyRoutes);
 app.use("/api/applications", applicationRoutes);
+app.use("/api/saved-jobs", savedJobRoutes);
 
 app.get("/", (req, res) => {
   res.json({
