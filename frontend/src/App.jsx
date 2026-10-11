@@ -8,6 +8,12 @@ import JobDetails from "./pages/JobDetails";
 import ApplyJob from "./pages/ApplyJob";
 import Applications from "./pages/Applications";
 import SavedJobs from "./pages/SavedJobs";
+import EmployerDashboard from "./pages/EmployerDashboard";
+import CompanyProfile from "./pages/CompanyProfile";
+import PostJob from "./pages/PostJob";
+import EmployerApplications from "./pages/EmployerApplications";
+import Profile from "./pages/Profile";
+import ManageJobs from "./pages/ManageJobs";
 
 function App() {
   return (
@@ -51,7 +57,21 @@ function App() {
   element={<Applications />}
 />
 <Route path="/saved-jobs" element={<SavedJobs />} />
-
+<Route
+  path="/employer"
+  element={<EmployerDashboard />}
+/>
+<Route
+  path="/employer/company"
+  element={<CompanyProfile />}
+/>
+<Route path="/employer/post-job" element={<PostJob />} />
+<Route
+  path="/employer/applications"
+  element={<EmployerApplications />}
+/>
+<Route path="/employer/jobs" element={<ManageJobs />} />
+<Route path="/profile" element={<Profile />} />
       </Routes>
     </BrowserRouter>
   );

@@ -9,3 +9,18 @@ dist/
 *.log
 
 .DS_Store
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Uploaded resumes - keep private
+backend/uploads/resumes/*
+!backend/uploads/resumes/.gitkeep
+
+# Dependencies and build files
+node_modules/
+dist/
+build/
+coverage/

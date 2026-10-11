@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../services/api";
+import "../App.css";
 
 function Applications() {
   const navigate = useNavigate();
@@ -50,20 +51,20 @@ function Applications() {
   };
 
   const getStatusClass = (status) => {
-    switch (status) {
-      case "Accepted":
-        return "status-accepted";
+  switch (status) {
+    case "Reviewed":
+      return "status-reviewed";
 
-      case "Shortlisted":
-        return "status-shortlisted";
+    case "Shortlisted":
+      return "status-shortlisted";
 
-      case "Rejected":
-        return "status-rejected";
+    case "Rejected":
+      return "status-rejected";
 
-      default:
-        return "status-pending";
-    }
-  };
+    default:
+      return "status-pending";
+  }
+};
 
   return (
     <div className="applications-page">

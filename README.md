@@ -22,4 +22,4 @@ JobSpot is a full-stack job portal developed as part of the CyberSNova Web Devel
 
 ## Project Status
 
-🚧 Under Development
+🚧 Under Developmentgit status

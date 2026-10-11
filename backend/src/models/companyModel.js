@@ -1,3 +1,4 @@
+
 const db = require("../config/db");
 
 const getCompanyByUserId = async (userId) => {
@@ -27,7 +28,37 @@ const createCompany = async (
   return result;
 };
 
+const updateCompany = async (
+  userId,
+  companyName,
+  description,
+  website,
+  location,
+  logo
+) => {
+  const [result] = await db.query(
+    `UPDATE companies
+     SET company_name = ?,
+         description = ?,
+         website = ?,
+         location = ?,
+         logo = ?
+     WHERE user_id = ?`,
+    [
+      companyName,
+      description,
+      website,
+      location,
+      logo,
+      userId,
+    ]
+  );
+
+  return result;
+};
+
 module.exports = {
   getCompanyByUserId,
-  createCompany
+  createCompany,
+  updateCompany,
 };
