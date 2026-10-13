@@ -2,6 +2,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../services/api";
+import "./CompanyProfile.css";
+
 
 function CompanyProfile() {
   const navigate = useNavigate();

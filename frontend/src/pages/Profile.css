@@ -1,0 +1,287 @@
+
+/* =========================================
+   JOBSPOT - MY PROFILE
+   Premium Lavender & Purple Theme
+========================================= */
+
+/* Main page and shared header styles are
+   reused from Applications.css */
+
+/* =========================================
+   PROFILE PAGE LAYOUT
+========================================= */
+
+.applications-container {
+  width: min(1120px, 88%);
+  margin: 0 auto;
+  padding: 48px 0 75px;
+}
+
+/* Profile Heading */
+
+.applications-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+  margin-bottom: 30px;
+  padding: 30px 32px;
+  border: 1px solid #e3dcfb;
+  border-radius: 22px;
+  background: linear-gradient(120deg, #ffffff 0%, #f8f5ff 100%);
+  box-shadow: 0 8px 28px rgba(79, 57, 139, 0.06);
+}
+
+.applications-heading > div > p {
+  margin: 0 0 10px;
+  color: #8068e9;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.applications-heading h1 {
+  margin: 0 0 12px;
+  color: #38266f;
+  font-size: clamp(28px, 3vw, 36px);
+  font-weight: 800;
+  letter-spacing: -1px;
+  line-height: 1.25;
+}
+
+.applications-heading > div > span {
+  display: block;
+  color: #79728d;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+/* =========================================
+   PROFILE FORM CARD
+========================================= */
+
+.application-card:has(.profile-field) {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 34px;
+  border: 1px solid #e3dcfb;
+  border-radius: 22px;
+  background: #ffffff;
+  box-shadow: 0 12px 35px rgba(79, 57, 139, 0.08);
+  animation: profile-card-appear 0.45s ease both;
+  transition: box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.application-card:has(.profile-field):hover {
+  border-color: #d5caf8;
+  box-shadow: 0 15px 40px rgba(79, 57, 139, 0.11);
+}
+
+@keyframes profile-card-appear {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================================
+   FORM LABELS AND FIELDS
+========================================= */
+
+.profile-field {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 25px;
+  color: #44365f;
+  font-size: 13px;
+  font-weight: 750;
+  line-height: 1.5;
+}
+
+/* Input and Textarea */
+
+.profile-field input,
+.profile-field textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 14px 16px;
+  border: 1px solid #ded7f2;
+  border-radius: 12px;
+  outline: none;
+  background: #fcfbff;
+  color: #30264e;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 450;
+  line-height: 1.65;
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+.profile-field input {
+  min-height: 49px;
+}
+
+.profile-field textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+/* Placeholder */
+
+.profile-field input::placeholder,
+.profile-field textarea::placeholder {
+  color: #a39bb7;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+/* Focus Effect */
+
+.profile-field input:focus,
+.profile-field textarea:focus {
+  border-color: #8068e9;
+  background: #ffffff;
+  box-shadow: 0 0 0 4px rgba(128, 104, 233, 0.12);
+}
+
+/* Read-only Email */
+
+.profile-field input:read-only {
+  border-color: #e8e3f4;
+  background: #f4f1fb;
+  color: #77708d;
+  cursor: default;
+}
+
+.profile-field input:read-only:focus {
+  border-color: #e8e3f4;
+  box-shadow: none;
+}
+
+/* =========================================
+   SUCCESS MESSAGE
+========================================= */
+
+.application-card:has(.profile-field) > p {
+  margin: 0 0 20px;
+  padding: 13px 16px;
+  border: 1px solid #bfe8d1;
+  border-radius: 11px;
+  background: #edfaf2;
+  color: #167442 !important;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* =========================================
+   SAVE PROFILE BUTTON
+========================================= */
+
+.application-card:has(.profile-field) .browse-applications-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 49px;
+  padding: 14px 28px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #8068e9, #5d45c6);
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 750;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(101, 88, 211, 0.22);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    filter 0.25s ease;
+}
+
+.application-card:has(.profile-field) .browse-applications-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 23px rgba(101, 88, 211, 0.3);
+  filter: brightness(1.04);
+}
+
+.application-card:has(.profile-field) .browse-applications-button:active {
+  transform: translateY(0);
+}
+
+/* =========================================
+   RESPONSIVE DESIGN
+========================================= */
+
+@media (max-width: 768px) {
+  .applications-container {
+    width: 92%;
+    padding: 32px 0 50px;
+  }
+
+  .applications-heading {
+    padding: 25px 22px;
+    margin-bottom: 24px;
+    border-radius: 18px;
+  }
+
+  .applications-heading h1 {
+    font-size: 29px;
+  }
+
+  .application-card:has(.profile-field) {
+    padding: 26px 22px;
+    border-radius: 18px;
+  }
+
+  .profile-field {
+    margin-bottom: 22px;
+  }
+}
+
+@media (max-width: 480px) {
+  .applications-container {
+    width: 92%;
+    padding-top: 25px;
+  }
+
+  .applications-heading {
+    padding: 22px 18px;
+  }
+
+  .applications-heading h1 {
+    font-size: 26px;
+  }
+
+  .applications-heading > div > span {
+    font-size: 13px;
+  }
+
+  .application-card:has(.profile-field) {
+    padding: 22px 17px;
+  }
+
+  .profile-field {
+    gap: 8px;
+    font-size: 12px;
+  }
+
+  .profile-field input,
+  .profile-field textarea {
+    padding: 12px 13px;
+    font-size: 13px;
+  }
+
+  .application-card:has(.profile-field) .browse-applications-button {
+    width: 100%;
+  }
+}

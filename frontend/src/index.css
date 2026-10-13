@@ -9,3 +9,79 @@ body,
 body {
   margin: 0;
 }
+
+/* JobSpot — Light Premium Design System */
+
+:root {
+  color-scheme: light;
+
+  --js-brand: #6558d3;
+  --js-brand-hover: #5144bd;
+  --js-accent: #ff805d;
+
+  --js-page: #f5f4fa;
+  --js-surface: #ffffff;
+
+  --js-text: #25243a;
+  --js-muted: #737187;
+  --js-border: #e8e6f0;
+
+  --js-success: #237b59;
+  --js-danger: #c24151;
+
+  --js-radius-sm: 10px;
+  --js-radius-md: 16px;
+  --js-radius-lg: 22px;
+
+  --js-shadow-card:
+    0 8px 28px rgba(45, 37, 94, 0.06);
+
+  --js-transition: 180ms ease;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--js-page);
+  color: var(--js-text);
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  transition:
+    background-color var(--js-transition),
+    color var(--js-transition),
+    border-color var(--js-transition),
+    box-shadow var(--js-transition),
+    transform var(--js-transition);
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--js-brand);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

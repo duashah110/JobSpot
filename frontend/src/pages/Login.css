@@ -1,0 +1,292 @@
+
+.auth-page {
+  --purple: #6852d6;
+  --purple-dark: #5140b5;
+  --lavender: #f0edff;
+  --text: #292642;
+
+  min-height: 100vh;
+  padding: 28px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: linear-gradient(135deg, #f5f2ff, #ebe5ff, #f8f6ff);
+  background-size: 200% 200%;
+  animation: loginBackground 14s ease-in-out infinite alternate;
+  color: var(--text);
+}
+
+/* Soft animated lavender circles */
+
+.auth-page::before,
+.auth-page::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.auth-page::before {
+  width: 300px;
+  height: 300px;
+  top: -130px;
+  left: -80px;
+  background: radial-gradient(
+    circle,
+    rgba(104, 82, 214, 0.22),
+    rgba(173, 155, 255, 0.08) 60%,
+    transparent 72%
+  );
+  animation: loginFloat 8s ease-in-out infinite alternate;
+}
+
+.auth-page::after {
+  width: 350px;
+  height: 350px;
+  right: -130px;
+  bottom: -170px;
+  background: radial-gradient(
+    circle,
+    rgba(139, 112, 235, 0.2),
+    rgba(203, 190, 255, 0.07) 60%,
+    transparent 72%
+  );
+  animation: loginFloat 10s ease-in-out infinite alternate-reverse;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+  box-sizing: border-box;
+  padding: 34px 34px 27px;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  border: 1px solid #e2dafb;
+  border-radius: 15px;
+  background: #fff;
+  box-shadow: 0 15px 45px rgba(72, 54, 140, 0.12);
+  animation: loginCardEnter 0.6s ease-out both;
+}
+
+/* Purple accent, consistent with other JobSpot pages */
+
+.auth-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 4px;
+  background: linear-gradient(90deg, #5140b5, #8c77ed, #c1b3ff);
+}
+
+.auth-brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: fit-content;
+  margin-bottom: 29px;
+  color: #292642;
+  font-size: 23px;
+  font-weight: 800;
+  letter-spacing: -0.7px;
+}
+
+.auth-brand::before {
+  content: "J";
+  width: 35px;
+  height: 35px;
+  display: grid;
+  place-items: center;
+  border-radius: 9px;
+  background: linear-gradient(135deg, #7965e3, #5945c4);
+  color: white;
+  font-size: 20px;
+  font-weight: 800;
+  box-shadow: 0 4px 12px rgba(104, 82, 214, 0.2);
+  transition: transform 0.25s ease;
+}
+
+.auth-brand:hover::before {
+  transform: translateY(-2px) rotate(-4deg);
+}
+
+.auth-card h1 {
+  margin: 0 0 9px;
+  color: #292642;
+  font-size: 29px;
+  font-weight: 800;
+  letter-spacing: -0.8px;
+}
+
+.auth-subtitle {
+  margin: 0 0 25px;
+  color: #79738d;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.auth-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.auth-card form label {
+  margin-top: 8px;
+  color: #45405e;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.auth-card form input {
+  width: 100%;
+  min-height: 45px;
+  box-sizing: border-box;
+  padding: 12px 13px;
+  border: 1px solid #ded8ed;
+  border-radius: 8px;
+  outline: none;
+  background: #fbfaff;
+  color: #292642;
+  font: inherit;
+  font-size: 13px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.auth-card form input::placeholder {
+  color: #aaa4b9;
+}
+
+.auth-card form input:hover {
+  border-color: #bcb0ed;
+}
+
+.auth-card form input:focus {
+  border-color: #7560dc;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(104, 82, 214, 0.12);
+}
+
+.auth-card form button {
+  width: 100%;
+  min-height: 46px;
+  margin-top: 15px;
+  padding: 12px 16px;
+  border: 0;
+  border-radius: 8px;
+  background: linear-gradient(110deg, #5945c4, #7861e3, #5945c4);
+  background-size: 200% 100%;
+  color: #fff;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 750;
+  cursor: pointer;
+  box-shadow: 0 5px 13px rgba(89, 69, 196, 0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease,
+    background-position 0.35s ease;
+}
+
+.auth-card form button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  background-position: 100% 0;
+  box-shadow: 0 8px 18px rgba(89, 69, 196, 0.28);
+}
+
+.auth-card form button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.auth-card form button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.auth-message {
+  margin: 14px 0 0;
+  padding: 11px 12px;
+  border: 1px solid #f0c9ce;
+  border-radius: 7px;
+  background: #fff1f2;
+  color: #ae3c50;
+  font-size: 12px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.auth-footer {
+  margin: 23px 0 0;
+  padding-top: 18px;
+  border-top: 1px solid #eeeafb;
+  color: #817b94;
+  font-size: 12px;
+  line-height: 1.8;
+  text-align: center;
+}
+
+.auth-footer a {
+  color: #6550cc;
+  font-weight: 750;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.auth-footer a:hover {
+  color: #4935ad;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@keyframes loginBackground {
+  from { background-position: 0% 40%; }
+  to { background-position: 100% 60%; }
+}
+
+@keyframes loginFloat {
+  from { transform: translate(0, 0) scale(1); }
+  to { transform: translate(22px, 18px) scale(1.08); }
+}
+
+@keyframes loginCardEnter {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 480px) {
+  .auth-page {
+    padding: 20px 14px;
+  }
+
+  .auth-card {
+    padding: 29px 22px 23px;
+    border-radius: 12px;
+  }
+
+  .auth-brand {
+    margin-bottom: 25px;
+    font-size: 21px;
+  }
+
+  .auth-card h1 {
+    font-size: 26px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .auth-page,
+  .auth-page::before,
+  .auth-page::after,
+  .auth-card {
+    animation: none !important;
+  }
+
+  .auth-card *,
+  .auth-card *::before,
+  .auth-card *::after {
+    transition: none !important;
+  }
+}

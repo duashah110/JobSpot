@@ -1,9 +1,8 @@
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../services/api";
-import { useEffect } from "react";
-import "../App.css";
+import "./Dashboard.css";
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -18,29 +17,57 @@ function Dashboard() {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
+
     if (!token) {
-      navigate("/login");
+      navigate("/login", { replace: true });
       return;
     }
 
-    const headers = { Authorization: `Bearer ${token}` };
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
 
-    api.get("/applications/my-applications", { headers })
-      .then((res) => {
-        const apps = res.data.applications || [];
+    const fetchApplications = async () => {
+      try {
+        const res = await api.get("/applications/my-applications", {
+          headers,
+        });
+
+        const apps = Array.isArray(res.data.applications)
+          ? res.data.applications
+          : [];
+
         setApplicationsCount(apps.length);
-        setShortlistedCount(
-          apps.filter((app) => app.status === "Shortlisted").length
-        );
-      })
-      .catch((err) => console.error("Applications count:", err));
 
-    api.get("/saved-jobs", { headers })
-      .then((res) => {
-        const jobs = res.data.savedJobs || res.data.jobs || [];
+        setShortlistedCount(
+          apps.filter(
+            (app) =>
+              String(app.status || "").toLowerCase() === "shortlisted"
+          ).length
+        );
+      } catch (err) {
+        console.error("Applications count:", err);
+      }
+    };
+
+    const fetchSavedJobs = async () => {
+      try {
+        const res = await api.get("/saved-jobs", { headers });
+
+        const jobs = Array.isArray(res.data.savedJobs)
+          ? res.data.savedJobs
+          : Array.isArray(res.data.jobs)
+            ? res.data.jobs
+            : [];
+
         setSavedCount(jobs.length);
-      })
-      .catch((err) => console.error("Saved jobs count:", err));
+      } catch (err) {
+        console.error("Saved jobs count:", err);
+      }
+    };
+
+    fetchApplications();
+    fetchSavedJobs();
   }, [navigate]);
 
   const logout = () => {
@@ -51,6 +78,7 @@ function Dashboard() {
 
   const goTo = (name) => {
     setActiveMenu(name);
+
     const routes = {
       Dashboard: "/dashboard",
       "Find Jobs": "/find-jobs",
@@ -58,13 +86,20 @@ function Dashboard() {
       Applications: "/applications",
       Profile: "/profile",
     };
-    navigate(routes[name]);
+
+    if (routes[name]) {
+      navigate(routes[name]);
+    }
   };
 
   const searchJobs = (e) => {
     e.preventDefault();
+
     navigate("/find-jobs", {
-      state: { keyword: keyword.trim(), location: location.trim() },
+      state: {
+        keyword: keyword.trim(),
+        location: location.trim(),
+      },
     });
   };
 
@@ -79,29 +114,45 @@ function Dashboard() {
   return (
     <div className="dashboard-layout">
       <aside className="sidebar">
-        <div className="sidebar-logo" onClick={() => goTo("Dashboard")}>
-          <div className="logo-icon">J</div>
-          <span>JobSpot</span>
-        </div>
+        <button
+          type="button"
+          className="sidebar-logo"
+          onClick={() => goTo("Dashboard")}
+          aria-label="Go to JobSpot dashboard"
+        >
+          <span className="logo-icon">J</span>
+          <span>
+            JobSpot<span className="logo-period">.</span>
+          </span>
+        </button>
 
-        <nav className="sidebar-nav">
+        <nav className="sidebar-nav" aria-label="Main navigation">
           {menuItems.map((item) => (
             <button
               key={item.name}
+              type="button"
               className={`sidebar-item ${
                 activeMenu === item.name ? "active" : ""
               }`}
               onClick={() => goTo(item.name)}
+              aria-current={activeMenu === item.name ? "page" : undefined}
             >
-              <span className="sidebar-icon">{item.icon}</span>
-              {item.name}
+              <span className="sidebar-icon" aria-hidden="true">
+                {item.icon}
+              </span>
+              <span>{item.name}</span>
             </button>
           ))}
         </nav>
 
         <div className="sidebar-bottom">
-          <button className="logout-button" onClick={logout}>
-            <span>↪</span> Logout
+          <button
+            type="button"
+            className="logout-button"
+            onClick={logout}
+          >
+            <span aria-hidden="true">↪</span>
+            Logout
           </button>
         </div>
       </aside>
@@ -114,132 +165,197 @@ function Dashboard() {
           </div>
 
           <button
+            type="button"
             className="header-profile"
             onClick={() => goTo("Profile")}
             title="Open your profile"
           >
-            <div className="avatar">
+            <span className="avatar">
               {user?.name?.charAt(0).toUpperCase() || "U"}
-            </div>
-            <div>
+            </span>
+
+            <span className="header-profile-info">
               <strong>{user?.name || "Job Seeker"}</strong>
               <span>{user?.email || ""}</span>
-            </div>
+            </span>
           </button>
         </header>
 
         <section className="welcome-section">
           <div>
             <p className="welcome-small">Welcome back 👋</p>
+
             <h1>
               Find your next <span>opportunity.</span>
             </h1>
+
             <p className="welcome-text">
-              Discover jobs that match your skills, experience and career goals.
+              Discover jobs that match your skills, experience and career
+              goals.
             </p>
           </div>
-          <div className="welcome-decoration">💼</div>
+
+          <div className="welcome-decoration" aria-hidden="true">
+            💼
+          </div>
         </section>
 
         <form className="job-search" onSubmit={searchJobs}>
-          <div className="search-field">
-            <span>⌕</span>
+          <label className="search-field">
+            <span aria-hidden="true">⌕</span>
             <input
+              type="search"
               value={keyword}
               onChange={(e) => setKeyword(e.target.value)}
               placeholder="Search job title, skills or keywords"
+              aria-label="Job title, skills or keywords"
             />
-          </div>
+          </label>
 
-          <div className="search-field location-field">
-            <span>⌖</span>
+          <label className="search-field location-field">
+            <span aria-hidden="true">⌖</span>
             <input
+              type="text"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
               placeholder="Location"
+              aria-label="Job location"
             />
-          </div>
+          </label>
 
           <button className="search-button" type="submit">
-            Search Jobs
+            Search Jobs <span aria-hidden="true">→</span>
           </button>
         </form>
 
-        <section className="stats-grid">
-          <button className="stat-card" onClick={() => goTo("Applications")}>
-            <div className="stat-icon blue">▣</div>
-            <div>
-              <p>Applications</p>
-              <h3>{applicationsCount}</h3>
-              <span>Jobs applied</span>
-            </div>
+        <section className="stats-grid" aria-label="Your job search statistics">
+          <button
+            type="button"
+            className="stat-card"
+            onClick={() => goTo("Applications")}
+          >
+            <span className="stat-icon blue">▣</span>
+            <span className="stat-content">
+              <span className="stat-label">Applications</span>
+              <strong className="stat-value">{applicationsCount}</strong>
+              <span className="stat-description">Jobs applied</span>
+            </span>
+            <span className="stat-arrow" aria-hidden="true">↗</span>
           </button>
 
-          <button className="stat-card" onClick={() => goTo("Saved Jobs")}>
-            <div className="stat-icon purple">♡</div>
-            <div>
-              <p>Saved Jobs</p>
-              <h3>{savedCount}</h3>
-              <span>Jobs saved</span>
-            </div>
+          <button
+            type="button"
+            className="stat-card"
+            onClick={() => goTo("Saved Jobs")}
+          >
+            <span className="stat-icon purple">♡</span>
+            <span className="stat-content">
+              <span className="stat-label">Saved Jobs</span>
+              <strong className="stat-value">{savedCount}</strong>
+              <span className="stat-description">Jobs saved</span>
+            </span>
+            <span className="stat-arrow" aria-hidden="true">↗</span>
           </button>
 
-          <button className="stat-card" onClick={() => goTo("Applications")}>
-            <div className="stat-icon green">✓</div>
-            <div>
-              <p>Shortlisted</p>
-              <h3>{shortlistedCount}</h3>
-              <span>Applications</span>
-            </div>
+          <button
+            type="button"
+            className="stat-card"
+            onClick={() => goTo("Applications")}
+          >
+            <span className="stat-icon coral">✓</span>
+            <span className="stat-content">
+              <span className="stat-label">Shortlisted</span>
+              <strong className="stat-value">{shortlistedCount}</strong>
+              <span className="stat-description">Applications</span>
+            </span>
+            <span className="stat-arrow" aria-hidden="true">↗</span>
           </button>
 
-          <button className="stat-card" onClick={() => goTo("Profile")}>
-            <div className="stat-icon orange">★</div>
-            <div>
-              <p>Profile</p>
-              <h3>View</h3>
-              <span>Manage your details</span>
-            </div>
+          <button
+            type="button"
+            className="stat-card"
+            onClick={() => goTo("Profile")}
+          >
+            <span className="stat-icon orange">★</span>
+            <span className="stat-content">
+              <span className="stat-label">Profile</span>
+              <strong className="stat-value stat-view-value">View</strong>
+              <span className="stat-description">Manage your details</span>
+            </span>
+            <span className="stat-arrow" aria-hidden="true">↗</span>
           </button>
         </section>
 
         <section className="content-section">
           <div className="section-heading">
             <div>
-              <h2>Recommended Jobs</h2>
-              <p>Explore opportunities for your next career move</p>
+              <p className="section-kicker">YOUR NEXT MOVE</p>
+              <h2>Recommended Jobs<span>.</span></h2>
+              <p>Explore opportunities for your next career move.</p>
             </div>
-            <button className="view-all" onClick={() => goTo("Find Jobs")}>
-              View all →
+
+            <button
+              type="button"
+              className="view-all"
+              onClick={() => goTo("Find Jobs")}
+            >
+              View all <span aria-hidden="true">→</span>
             </button>
           </div>
 
           <div className="empty-jobs">
-            <div className="empty-icon">🔎</div>
-            <h3>Explore available jobs</h3>
+            <div className="empty-icon" aria-hidden="true">
+              <span>⌕</span>
+            </div>
+
+            <p className="empty-eyebrow">YOUR NEXT OPPORTUNITY</p>
+            <h3>Discover your next role</h3>
+
             <p>
               Browse current openings and find opportunities that match your
               skills and interests.
             </p>
-            <button className="browse-button" onClick={() => goTo("Find Jobs")}>
-              Browse Jobs
+
+            <button
+              type="button"
+              className="browse-button"
+              onClick={() => goTo("Find Jobs")}
+            >
+              Explore Jobs <span aria-hidden="true">→</span>
             </button>
           </div>
         </section>
 
         <section className="profile-card">
-          <div className="profile-card-icon">👤</div>
+          <div className="profile-card-icon" aria-hidden="true">
+            ◯
+          </div>
+
           <div className="profile-card-content">
+            <p className="profile-card-label">STAND OUT TO EMPLOYERS</p>
             <h3>Keep your profile up to date</h3>
+
             <p>
-              Add your skills, experience and education to help employers learn
-              more about you.
+              Add your skills, experience and education to help employers
+              learn more about you.
             </p>
           </div>
-          <button className="profile-button" onClick={() => goTo("Profile")}>
-            My Profile →
+
+          <button
+            type="button"
+            className="profile-button"
+            onClick={() => goTo("Profile")}
+          >
+            My Profile <span aria-hidden="true">→</span>
           </button>
         </section>
+
+        <footer className="dashboard-footer">
+          <span className="footer-brand">
+            JobSpot<span>.</span>
+          </span>
+          <span>Find your place. Build your future.</span>
+        </footer>
       </main>
     </div>
   );

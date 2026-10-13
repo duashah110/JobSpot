@@ -1,9 +1,15 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../services/api";
+import "./FindJobs.css";
 
 function FindJobs() {
   const navigate = useNavigate();
+  
+const user = JSON.parse(localStorage.getItem("user") || "null");
+const isEmployer = user?.role?.toLowerCase() === "employer";
+const dashboardPath = isEmployer ? "/employer" : "/dashboard";
+
 
   const [jobs, setJobs] = useState([]);
   const [filteredJobs, setFilteredJobs] = useState([]);
@@ -83,37 +89,59 @@ const loadJobs = async () => {
 
         <div
           className="jobs-logo"
-          onClick={() => navigate("/dashboard")}
+          onClick={() => 
+navigate(dashboardPath)
+}
         >
           <div className="jobs-logo-icon">J</div>
           <span>JobSpot</span>
         </div>
 
-        <nav className="jobs-nav">
+        
+<nav className="jobs-nav">
+  <button onClick={() => navigate(dashboardPath)}>
+    Dashboard
+  </button>
 
-          <button
-            onClick={() => navigate("/dashboard")}
-          >
-            Dashboard
-          </button>
+  <button className="jobs-nav-active">
+    Find Jobs
+  </button>
 
-          <button className="jobs-nav-active">
-            Find Jobs
-          </button>
+  {!isEmployer && (
+    <>
+      <button onClick={() => navigate("/saved-jobs")}>
+        Saved Jobs
+      </button>
 
-          <button onClick={() => navigate("/saved-jobs")}>
-  Saved Jobs
-</button>
+      <button onClick={() => navigate("/applications")}>
+        Applications
+      </button>
+    </>
+  )}
 
-          <button>
-            Applications
-          </button>
+  {isEmployer && (
+    <>
+      <button onClick={() => navigate("/employer/jobs")}>
+        Manage Jobs
+      </button>
 
-        </nav>
+      <button onClick={() => navigate("/employer/applications")}>
+        Applications
+      </button>
+
+      <button onClick={() => navigate("/employer/company")}>
+        Company Profile
+      </button>
+    </>
+  )}
+</nav>
+
 
         <button
           className="jobs-profile-button"
-          onClick={() => navigate("/dashboard")}
+          onClick={() => 
+navigate(dashboardPath)
+}
         >
           My Dashboard
         </button>

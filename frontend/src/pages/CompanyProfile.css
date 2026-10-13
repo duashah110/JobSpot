@@ -1,0 +1,371 @@
+/* =====================================================
+   JobSpot | Company Profile
+   Consistent with Employer Applications purple theme
+   ===================================================== */
+
+.company-profile-page {
+  --company-purple: #6558d3;
+  --company-purple-light: #8068e9;
+  --company-purple-dark: #4e38b6;
+  --company-ink: #29263d;
+  --company-muted: #7d798f;
+  --company-border: #ded7fb;
+  min-height: 100vh;
+  background: #f0edff;
+  color: var(--company-ink);
+  font-family: Inter, "Segoe UI", sans-serif;
+  padding-bottom: 76px;
+}
+
+.company-profile-page *,
+.company-profile-page *::before,
+.company-profile-page *::after { box-sizing: border-box; }
+
+/* Header — same JobSpot wordmark treatment as Applications */
+.company-profile-header {
+  min-height: 76px;
+  padding: 14px 7%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: linear-gradient(110deg, #ffffff 0%, #f2efff 100%);
+  border-bottom: 1px solid #ddd5ff;
+  box-shadow: 0 4px 20px #6558d310;
+}
+
+.company-brand {
+  color: #5947c5;
+  font-size: 23px;
+  font-weight: 800;
+  letter-spacing: -0.7px;
+  white-space: nowrap;
+}
+
+.company-back-button {
+  padding: 10px 15px;
+  border: 1px solid #e3def8;
+  border-radius: 10px;
+  background: #fff;
+  color: #5c4fc6;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background .2s ease, border-color .2s ease,
+              box-shadow .2s ease, transform .2s ease;
+}
+.company-back-button:hover {
+  background: #f2efff;
+  border-color: #cfc4fa;
+  box-shadow: 0 5px 14px #6558d315;
+  transform: translateY(-2px);
+}
+.company-back-button:active { transform: translateY(0); }
+
+/* Main heading */
+.company-profile-container {
+  position: relative;
+  width: min(760px, 88%);
+  margin: 0 auto;
+  padding-top: 48px;
+  isolation: isolate;
+}
+.company-profile-container::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 15px;
+  right: -55px;
+  width: 235px;
+  height: 235px;
+  background: radial-gradient(circle, #dcd4ff 0%, #eae5ff 45%, transparent 72%);
+  pointer-events: none;
+}
+.company-eyebrow {
+  margin: 0 0 12px;
+  color: #6550d0;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  animation: company-fade-up .55s ease both;
+}
+.company-profile-container > h1 {
+  margin: 0;
+  color: #38266f;
+  font-size: clamp(30px, 4vw, 42px);
+  line-height: 1.2;
+  letter-spacing: -1.2px;
+  animation: company-fade-up .55s .07s ease both;
+}
+.company-intro {
+  max-width: 590px;
+  margin: 13px 0 30px;
+  color: #7d798f;
+  font-size: 15px;
+  line-height: 1.8;
+  animation: company-fade-up .55s .14s ease both;
+}
+
+/* Main form card */
+.company-profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 32px;
+  background: linear-gradient(145deg, #ffffff 0%, #faf8ff 100%);
+  border: 1px solid #ded7fb;
+  border-radius: 18px;
+  box-shadow: 0 8px 25px #5942ad0d;
+  animation: company-card-appear .65s .18s ease both;
+  transition: box-shadow .25s ease, border-color .25s ease;
+}
+.company-profile-form:hover {
+  border-color: #cfc4f8;
+  box-shadow: 0 15px 34px #5942ad12;
+}
+.company-profile-form > label {
+  display: block;
+  margin: 0 0 9px;
+  color: #403a56;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+.company-profile-form > input,
+.company-profile-form > textarea {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  margin: 0 0 23px;
+  padding: 13px 15px;
+  border: 1px solid #e5e0ef;
+  border-radius: 10px;
+  outline: none;
+  background: #fdfcff;
+  color: #39344d;
+  font: inherit;
+  font-size: 13px;
+  line-height: 1.6;
+  transition: border-color .2s ease, background .2s ease,
+              box-shadow .2s ease, transform .2s ease;
+}
+.company-profile-form > input { min-height: 47px; }
+.company-profile-form > textarea {
+  min-height: 130px;
+  resize: vertical;
+}
+.company-profile-form > input::placeholder,
+.company-profile-form > textarea::placeholder { color: #a39db4; }
+.company-profile-form > input:hover,
+.company-profile-form > textarea:hover {
+  border-color: #c9bdf4;
+  background: #fff;
+}
+.company-profile-form > input:focus,
+.company-profile-form > textarea:focus {
+  border-color: #7861e5;
+  background: #fff;
+  box-shadow: 0 0 0 4px #7861e526;
+}
+.company-profile-form > input:disabled,
+.company-profile-form > textarea:disabled { opacity: .65; cursor: not-allowed; }
+
+/* Status messages */
+.company-message {
+  margin: 0 0 22px;
+  padding: 13px 15px;
+  border: 1px solid;
+  border-radius: 10px;
+  font-size: 13px;
+  line-height: 1.7;
+  animation: company-fade-up .3s ease both;
+}
+.company-message.success {
+  color: #27674c;
+  background: #effaf4;
+  border-color: #bde9d0;
+}
+.company-message.error {
+  color: #b7464c;
+  background: #fff3f3;
+  border-color: #f3cccc;
+}
+
+/* Primary action */
+.company-profile-form > button[type="submit"] {
+  align-self: flex-start;
+  min-height: 46px;
+  padding: 12px 22px;
+  border: 0;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #8068e9, #5d45c6);
+  color: #fff;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 5px 14px #6558d326;
+  transition: background .2s ease, box-shadow .2s ease,
+              transform .2s ease;
+}
+.company-profile-form > button[type="submit"]:hover:not(:disabled) {
+  background: linear-gradient(135deg, #6e55d8, #4d36b5);
+  box-shadow: 0 9px 20px #6558d33d;
+  transform: translateY(-2px);
+}
+.company-profile-form > button[type="submit"]:active:not(:disabled) {
+  transform: translateY(0);
+}
+.company-profile-form > button[type="submit"]:disabled {
+  opacity: .65;
+  cursor: wait;
+}
+.company-profile-page button:focus-visible {
+  outline: 3px solid #a494f5;
+  outline-offset: 3px;
+}
+
+/* Loading */
+.company-loading {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  padding: 24px;
+  background: #f0edff;
+  color: #5947c5;
+  font: 700 15px Inter, "Segoe UI", sans-serif;
+  text-align: center;
+  animation: company-loading-pulse 1.4s ease-in-out infinite;
+}
+
+/* Motion */
+@keyframes company-fade-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes company-card-appear {
+  from { opacity: 0; transform: translateY(18px) scale(.985); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes company-loading-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .45; }
+}
+
+/* Responsive */
+@media (max-width: 850px) {
+  .company-profile-header { padding-right: 5%; padding-left: 5%; }
+  .company-profile-container { width: 90%; padding-top: 38px; }
+}
+@media (max-width: 520px) {
+  .company-profile-page { padding-bottom: 42px; }
+  .company-profile-header { min-height: 68px; padding: 12px 4%; gap: 8px; }
+  .company-brand { font-size: 19px; }
+  .company-back-button { padding: 9px 10px; font-size: 11px; }
+  .company-profile-container { width: 91%; padding-top: 32px; }
+  .company-profile-container::before { right: 0; width: 150px; height: 150px; }
+  .company-profile-container > h1 { font-size: 30px; letter-spacing: -.8px; }
+  .company-intro { font-size: 14px; margin-bottom: 24px; }
+  .company-profile-form { padding: 22px 18px; border-radius: 15px; }
+  .company-profile-form > input,
+  .company-profile-form > textarea { margin-bottom: 19px; }
+  .company-profile-form > button[type="submit"] { width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .company-profile-page *,
+  .company-profile-page *::before,
+  .company-profile-page *::after,
+  .company-loading {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* =====================================================
+   Refined premium form card — JobSpot lavender aesthetic
+   ===================================================== */
+.company-profile-container { width: min(820px, 90%); }
+.company-profile-form {
+  position: relative;
+  overflow: hidden;
+  padding: 42px 46px 38px;
+  border: 1px solid #d9d0f8;
+  border-radius: 24px;
+  background: linear-gradient(155deg, #ffffff 0%, #ffffff 60%, #f7f4ff 100%);
+  box-shadow: 0 22px 65px rgba(70, 45, 151, .12), 0 3px 12px rgba(70, 45, 151, .04);
+}
+.company-profile-form::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 6px;
+  background: linear-gradient(90deg, #5d45c6 0%, #8068e9 55%, #c5b6ff 100%);
+}
+.company-profile-form::after {
+  content: "";
+  position: absolute;
+  width: 210px; height: 210px;
+  top: -130px; right: -100px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(198,185,255,.3), transparent 70%);
+  pointer-events: none;
+}
+.company-profile-form:hover {
+  border-color: #c9bafa;
+  box-shadow: 0 26px 70px rgba(70,45,151,.15), 0 5px 16px rgba(70,45,151,.05);
+}
+.company-profile-form > label {
+  position: relative;
+  margin-bottom: 10px;
+  color: #352c59;
+  font-size: 13px;
+  font-weight: 750;
+  letter-spacing: .1px;
+}
+.company-profile-form > input,
+.company-profile-form > textarea {
+  position: relative;
+  min-height: 52px;
+  margin-bottom: 26px;
+  padding: 14px 17px;
+  border: 1px solid #e1dbf2;
+  border-radius: 13px;
+  background: #f9f7ff;
+  color: #302848;
+  font-size: 14px;
+  box-shadow: inset 0 1px 2px rgba(52,36,103,.025);
+}
+.company-profile-form > textarea { min-height: 146px; }
+.company-profile-form > input:hover,
+.company-profile-form > textarea:hover {
+  background: #fff;
+  border-color: #b8a8f3;
+}
+.company-profile-form > input:focus,
+.company-profile-form > textarea:focus {
+  border-color: #8068e9;
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(128,104,233,.14), 0 5px 15px rgba(84,62,168,.055);
+}
+.company-profile-form > button[type="submit"] {
+  align-self: stretch;
+  min-height: 54px;
+  margin-top: 5px;
+  border-radius: 13px;
+  font-size: 14px;
+  letter-spacing: .15px;
+  box-shadow: 0 9px 22px rgba(93,69,198,.24);
+}
+.company-profile-form > button[type="submit"]:hover:not(:disabled) {
+  box-shadow: 0 13px 27px rgba(93,69,198,.31);
+  transform: translateY(-2px);
+}
+@media (max-width: 520px) {
+  .company-profile-container { width: 92%; }
+  .company-profile-form { padding: 30px 20px 25px; border-radius: 19px; }
+  .company-profile-form > input,
+  .company-profile-form > textarea { margin-bottom: 21px; min-height: 49px; }
+}

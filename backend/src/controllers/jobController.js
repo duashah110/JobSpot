@@ -5,7 +5,8 @@ const {
   createJob,
   getMyJobs,
   updateJob,
-  deleteJob
+  deleteJob,
+  getEmployerStats
 } = require("../models/jobModel");
 
 const db = require("../config/db");
@@ -297,14 +298,41 @@ const removeJob = async (req, res) => {
   }
 };
 
+const getEmployerDashboardStats = async (req, res) => {
+  try {
+    if (req.user.role !== "employer") {
+      return res.status(403).json({
+        message: "Only employers can view these statistics"
+      });
+    }
 
+    const stats = await getEmployerStats(req.user.id);
 
+    return res.json({
+      success: true,
+      stats: {
+        totalJobs: Number(stats.totalJobs || 0),
+        activeJobs: Number(stats.activeJobs || 0),
+        totalApplications: Number(stats.totalApplications || 0),
+        shortlistedCandidates: Number(
+          stats.shortlistedCandidates || 0
+        )
+      }
+    });
+  } catch (error) {
+    console.error("Employer dashboard stats error:", error);
+
+    return res.status(500).json({
+      message: "Failed to load dashboard statistics"
+    });
+  }
+};
 module.exports = {
   getJobs,
   getSingleJob,
   addJob,
   getEmployerJobs,
   editJob,
-  removeJob
+  removeJob,
+  getEmployerDashboardStats
 };
-

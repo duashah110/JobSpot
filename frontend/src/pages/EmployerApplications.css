@@ -1,0 +1,555 @@
+/* JobSpot — Employer Applications */
+
+.employer-applications-page {
+  min-height: 100vh;
+  background: #f8f8fc;
+  color: #29263d;
+  font-family: Inter, "Segoe UI", sans-serif;
+}
+
+.employer-applications-header {
+  min-height: 76px;
+  padding: 14px 7%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: #fff;
+  border-bottom: 1px solid #eeebf5;
+}
+
+.employer-applications-header button {
+  padding: 10px 15px;
+  color: #5c4fc6;
+  background: #fff;
+  border: 1px solid #e3def8;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.employer-applications-header button:hover {
+  background: #f2efff;
+  transform: translateY(-1px);
+}
+
+.employer-applications-logo {
+  color: #29243e;
+  font-size: 23px;
+  font-weight: 800;
+  letter-spacing: -0.7px;
+}
+
+.employer-applications-container {
+  width: min(1080px, 88%);
+  margin: 0 auto;
+  padding: 48px 0 75px;
+}
+
+.employer-eyebrow {
+  margin: 0 0 12px;
+  color: #6a5bd2;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.employer-applications-container > h1 {
+  margin: 0;
+  color: #29263d;
+  font-size: clamp(30px, 4vw, 42px);
+  line-height: 1.2;
+  letter-spacing: -1.2px;
+}
+
+.employer-applications-subtitle {
+  margin: 13px 0 30px;
+  color: #7d798f;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+/* Candidate list */
+
+.employer-applications-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.employer-application-card {
+  min-width: 0;
+  padding: 24px;
+  background: #fff;
+  border: 1px solid #eae7f3;
+  border-radius: 18px;
+  box-shadow: 0 7px 25px #32245a07;
+  transition: transform 0.22s ease, box-shadow 0.22s ease,
+    border-color 0.22s ease;
+  animation: employer-card-appear 0.35s ease both;
+}
+
+.employer-application-card:hover {
+  transform: translateY(-3px);
+  border-color: #d9d2fb;
+  box-shadow: 0 15px 34px #32245a10;
+}
+
+.employer-application-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+  padding-bottom: 19px;
+  border-bottom: 1px solid #f0edf6;
+}
+
+.employer-application-top h2 {
+  margin: 0;
+  color: #302b46;
+  font-size: 19px;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.employer-application-top p {
+  margin: 7px 0 0;
+  color: #858197;
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
+.employer-application-status {
+  flex-shrink: 0;
+  padding: 7px 10px;
+  color: #5e4fc4;
+  background: #f0edff;
+  border: 1px solid #e5e0ff;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+/* Job information */
+
+.employer-application-job {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  margin: 18px 0;
+  padding: 15px;
+  background: #faf9fd;
+  border: 1px solid #f0edf7;
+  border-radius: 12px;
+}
+
+.employer-application-job strong {
+  color: #4f43a9;
+  font-size: 14px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.employer-application-job span {
+  color: #858197;
+  font-size: 12px;
+}
+
+/* Cover letter */
+
+.employer-application-cover {
+  margin: 19px 0;
+}
+
+.employer-application-cover strong {
+  display: block;
+  margin-bottom: 9px;
+  color: #403a56;
+  font-size: 13px;
+}
+
+.employer-application-cover p {
+  margin: 0;
+  color: #777389;
+  font-size: 13px;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+/* Resume link */
+
+.employer-resume-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 0 21px;
+  padding: 10px 14px;
+  color: #5d4dc7;
+  background: #f2efff;
+  border: 1px solid #e6e0ff;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 800;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.employer-resume-link:hover {
+  background: #e8e2ff;
+  transform: translateY(-1px);
+}
+
+/* Status control */
+
+.employer-status-label {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  padding-top: 18px;
+  border-top: 1px solid #f0edf6;
+  color: #454158;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.employer-status-label select {
+  width: 100%;
+  padding: 12px 13px;
+  color: #39344d;
+  background: #fff;
+  border: 1px solid #e5e0ef;
+  border-radius: 10px;
+  outline: none;
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.employer-status-label select:focus {
+  border-color: #7868e5;
+  box-shadow: 0 0 0 4px #7868e51a;
+}
+
+.employer-status-label select:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+/* Error and empty states */
+
+.employer-applications-error,
+.employer-applications-empty {
+  padding: 35px 25px;
+  background: #fff;
+  border: 1px solid #eae7f3;
+  border-radius: 17px;
+  text-align: center;
+}
+
+.employer-applications-error {
+  color: #bd4e50;
+  line-height: 1.8;
+}
+
+.employer-applications-error button,
+.employer-applications-empty button {
+  display: block;
+  margin: 18px auto 0;
+  padding: 12px 18px;
+  color: #fff;
+  background: #6558d3;
+  border: 1px solid #6558d3;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.employer-applications-error button:hover,
+.employer-applications-empty button:hover {
+  background: #5143bd;
+  transform: translateY(-1px);
+}
+
+.employer-applications-empty {
+  padding: 55px 25px;
+  border-style: dashed;
+  border-color: #dcd6ef;
+}
+
+.employer-applications-empty h2 {
+  margin: 0;
+  color: #302b46;
+  font-size: 22px;
+}
+
+.employer-applications-empty p {
+  margin: 12px 0 0;
+  color: #858197;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+/* Loading state */
+
+.employer-applications-container > p:not(.employer-eyebrow):not(.employer-applications-subtitle) {
+  color: #777389;
+}
+
+/* Animation */
+
+@keyframes employer-card-appear {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Tablet */
+
+@media (max-width: 850px) {
+  .employer-applications-container {
+    width: 90%;
+    padding-top: 38px;
+  }
+
+  .employer-applications-list {
+    grid-template-columns: 1fr;
+  }
+
+  .employer-applications-header {
+    padding-right: 5%;
+    padding-left: 5%;
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 520px) {
+  .employer-applications-header {
+    gap: 8px;
+    padding: 12px 4%;
+  }
+
+  .employer-applications-header button {
+    padding: 9px 10px;
+    font-size: 11px;
+  }
+
+  .employer-applications-logo {
+    font-size: 19px;
+  }
+
+  .employer-applications-container {
+    width: 91%;
+    padding-top: 32px;
+  }
+
+  .employer-applications-container > h1 {
+    font-size: 30px;
+    letter-spacing: -0.8px;
+  }
+
+  .employer-applications-subtitle {
+    font-size: 14px;
+  }
+
+  .employer-application-card {
+    padding: 18px;
+    border-radius: 15px;
+  }
+
+  .employer-application-top {
+    flex-direction: column;
+  }
+
+  .employer-applications-empty {
+    padding: 38px 18px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .employer-applications-page *,
+  .employer-applications-page *::before,
+  .employer-applications-page *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+/* ===== Purple-rich JobSpot theme upgrade ===== */
+
+/* Lavender page background */
+.employer-applications-page {
+  background: #f0edff;
+}
+
+/* Richer header */
+.employer-applications-header {
+  background: linear-gradient(110deg, #ffffff 0%, #f2efff 100%);
+  border-bottom: 1px solid #ddd5ff;
+  box-shadow: 0 4px 20px #6558d310;
+}
+
+.employer-applications-logo {
+  color: #5947c5;
+}
+
+/* Purple hero section */
+.employer-applications-container {
+  position: relative;
+}
+
+.employer-applications-container::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  top: 20px;
+  right: 0;
+  width: 190px;
+  height: 190px;
+  background: radial-gradient(circle, #dcd4ff 0%, #eae5ff 45%, transparent 72%);
+  pointer-events: none;
+}
+
+.employer-eyebrow,
+.employer-applications-container > h1,
+.employer-applications-subtitle {
+  position: relative;
+  z-index: 1;
+}
+
+.employer-eyebrow {
+  color: #6550d0;
+}
+
+.employer-applications-container > h1 {
+  color: #38266f;
+}
+
+/* Purple-tinted candidate cards */
+.employer-application-card {
+  background: linear-gradient(145deg, #ffffff 0%, #faf8ff 100%);
+  border-color: #ded7fb;
+  box-shadow: 0 8px 25px #5942ad0d;
+}
+
+.employer-application-card:hover {
+  background: linear-gradient(145deg, #ffffff 0%, #f3efff 100%);
+  border-color: #bdb0fa;
+  box-shadow: 0 16px 35px #5942ad1a;
+}
+
+/* Candidate name and status */
+.employer-application-top h2 {
+  color: #4a359c;
+}
+
+.employer-application-status {
+  color: #ffffff;
+  background: linear-gradient(135deg, #8068e9, #5c45c4);
+  border: none;
+  box-shadow: 0 4px 10px #6558d326;
+}
+
+/* Lavender job details */
+.employer-application-job {
+  background: #f0ecff;
+  border-color: #e2dafe;
+}
+
+.employer-application-job strong {
+  color: #5b45bf;
+}
+
+/* Cover letter section */
+.employer-application-cover {
+  padding: 15px;
+  background: #faf8ff;
+  border-left: 3px solid #8b75ed;
+  border-radius: 0 10px 10px 0;
+}
+
+.employer-application-cover strong {
+  color: #563eac;
+}
+
+.employer-application-cover p {
+  color: #716887;
+}
+
+/* Purple resume button */
+.employer-resume-link {
+  color: #ffffff;
+  background: linear-gradient(135deg, #8068e9, #6048c9);
+  border-color: transparent;
+  box-shadow: 0 5px 13px #6558d326;
+}
+
+.employer-resume-link:hover {
+  background: linear-gradient(135deg, #6e55d8, #4e38b6);
+  box-shadow: 0 8px 18px #6558d33d;
+}
+
+/* Purple status dropdown */
+.employer-status-label {
+  color: #51417f;
+}
+
+.employer-status-label select {
+  background: #f6f3ff;
+  border-color: #dcd3fc;
+  color: #49368f;
+}
+
+.employer-status-label select:focus {
+  background: #ffffff;
+  border-color: #7861e5;
+  box-shadow: 0 0 0 4px #7861e526;
+}
+
+/* More visible purple buttons */
+.employer-applications-header button:last-child,
+.employer-applications-error button,
+.employer-applications-empty button {
+  color: #ffffff;
+  background: linear-gradient(135deg, #8068e9, #5d45c6);
+  border-color: transparent;
+  box-shadow: 0 5px 14px #6558d326;
+}
+
+.employer-applications-header button:last-child:hover,
+.employer-applications-error button:hover,
+.employer-applications-empty button:hover {
+  background: linear-gradient(135deg, #6e55d8, #4d36b5);
+}
+
+/* Lavender empty and error panels */
+.employer-applications-empty,
+.employer-applications-error {
+  background: linear-gradient(145deg, #ffffff, #f1edff);
+  border-color: #dcd3fa;
+}
+
+.employer-applications-empty h2 {
+  color: #4a359c;
+}
+
+/* Keep reduced-motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .employer-applications-page *,
+  .employer-applications-page *::before,
+  .employer-applications-page *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

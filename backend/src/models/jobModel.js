@@ -151,11 +151,45 @@ const deleteJob = async (jobId, userId) => {
   return result;
 };
 
+const getEmployerStats = async (userId) => {
+  const [rows] = await db.query(
+    `SELECT
+       COUNT(DISTINCT jobs.id) AS totalJobs,
+
+       COUNT(DISTINCT CASE
+         WHEN jobs.deadline IS NULL
+           OR jobs.deadline >= CURDATE()
+         THEN jobs.id
+       END) AS activeJobs,
+
+       COUNT(applications.id) AS totalApplications,
+
+       COALESCE(SUM(
+         CASE
+           WHEN LOWER(applications.status) = 'shortlisted'
+           THEN 1
+           ELSE 0
+         END
+       ), 0) AS shortlistedCandidates
+
+     FROM companies
+     LEFT JOIN jobs
+       ON jobs.company_id = companies.id
+     LEFT JOIN applications
+       ON applications.job_id = jobs.id
+     WHERE companies.user_id = ?`,
+    [userId]
+  );
+
+  return rows[0];
+};
+
 module.exports = {
   getAllJobs,
   getJobById,
   createJob,
   getMyJobs,
   updateJob,
-  deleteJob
+  deleteJob,
+  getEmployerStats
 };
